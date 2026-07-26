@@ -1,4 +1,4 @@
-public class Student {
+public abstract class Student {
 
     private int id;
     private String name;
@@ -56,10 +56,6 @@ public class Student {
         this.major = major;
     }
 
-    public void displayStudentInfo() {
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Major: " + major);
-    }
+    public abstract void displayStudentInfo();
+    
 }

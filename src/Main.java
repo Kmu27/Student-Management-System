@@ -93,11 +93,21 @@ public class Main {
         System.out.print("Enter Student Major: ");
         String major = input.nextLine();
 
-        Student student = new Student(id, name, age, major);
-        students.add(student);
+ System.out.print("Enter Supervisor Name: ");
+String supervisor = input.nextLine();
 
+Student student = new GraduateStudent(
+        id,
+        name,
+        age,
+        major,
+        supervisor
+);
+
+students.add(student);
         System.out.println("Student added successfully.");
-    }
+
+}
 
     public static void viewStudents(
             ArrayList<Student> students) {
