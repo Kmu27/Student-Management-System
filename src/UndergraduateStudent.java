@@ -1,4 +1,4 @@
-public class UndergraduateStudent extends Student {
+public class UndergraduateStudent extends Student implements Reportable  {
 
     private double gpa;
 
@@ -28,5 +28,11 @@ public class UndergraduateStudent extends Student {
         System.out.println("Age: " + getAge());
         System.out.println("Major: " + getMajor());
         System.out.println("GPA: " + gpa);
+    }
+
+    @Override
+    public void printReport() {
+        System.out.println("Undergraduate Student Report");
+        displayStudentInfo();
     }
 }

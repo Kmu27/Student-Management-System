@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+1
 public class Main {
 
     public static void main(String[] args) {
@@ -41,7 +41,9 @@ public class Main {
                     return;
 
                 default:
-                    System.out.println("Invalid choice. Please choose from 1 to 6.");
+                    System.out.println(
+                            "Invalid choice. Please choose from 1 to 6."
+                    );
             }
         }
     }
@@ -57,20 +59,50 @@ public class Main {
         System.out.println("6. Exit");
     }
 
-    public static int readInteger(Scanner input, String message) {
+    public static int readInteger(
+            Scanner input,
+            String message) {
 
         while (true) {
 
             System.out.print(message);
 
-            if (input.hasNextInt()) {
-                int number = input.nextInt();
-                input.nextLine();
-                return number;
-            }
+            String value = input.nextLine().trim();
 
-            System.out.println("Invalid input. Please enter a number.");
-            input.nextLine();
+            try {
+                return Integer.parseInt(value);
+
+            } catch (NumberFormatException exception) {
+
+                System.out.println(
+                        "Invalid input. Please enter an integer number."
+                );
+            }
+        }
+    }
+
+    public static double readDouble(
+            Scanner input,
+            String message) {
+
+        while (true) {
+
+            System.out.print(message);
+
+            String value = input.nextLine().trim();
+
+            // يقبل 3.34 ويقبل أيضًا 3,34
+            value = value.replace(',', '.');
+
+            try {
+                return Double.parseDouble(value);
+
+            } catch (NumberFormatException exception) {
+
+                System.out.println(
+                        "Invalid input. Please enter a decimal number."
+                );
+            }
         }
     }
 
@@ -78,7 +110,23 @@ public class Main {
             ArrayList<Student> students,
             Scanner input) {
 
-        int id = readInteger(input, "Enter Student ID: ");
+        System.out.println("\n1. Graduate Student");
+        System.out.println("2. Undergraduate Student");
+
+        int type = readInteger(
+                input,
+                "Choose student type: "
+        );
+
+        if (type != 1 && type != 2) {
+            System.out.println("Invalid student type.");
+            return;
+        }
+
+        int id = readInteger(
+                input,
+                "Enter Student ID: "
+        );
 
         if (isStudentIdExists(students, id)) {
             System.out.println("Student ID already exists.");
@@ -88,26 +136,48 @@ public class Main {
         System.out.print("Enter Student Name: ");
         String name = input.nextLine();
 
-        int age = readInteger(input, "Enter Student Age: ");
+        int age = readInteger(
+                input,
+                "Enter Student Age: "
+        );
 
         System.out.print("Enter Student Major: ");
         String major = input.nextLine();
 
- System.out.print("Enter Supervisor Name: ");
-String supervisor = input.nextLine();
+        Student student;
 
-Student student = new GraduateStudent(
-        id,
-        name,
-        age,
-        major,
-        supervisor
-);
+        if (type == 1) {
 
-students.add(student);
+            System.out.print("Enter Supervisor Name: ");
+            String supervisor = input.nextLine();
+
+            student = new GraduateStudent(
+                    id,
+                    name,
+                    age,
+                    major,
+                    supervisor
+            );
+
+        } else {
+
+            double gpa = readDouble(
+                    input,
+                    "Enter GPA: "
+            );
+
+            student = new UndergraduateStudent(
+                    id,
+                    name,
+                    age,
+                    major,
+                    gpa
+            );
+        }
+
+        students.add(student);
         System.out.println("Student added successfully.");
-
-}
+    }
 
     public static void viewStudents(
             ArrayList<Student> students) {
@@ -143,7 +213,10 @@ students.add(student);
             ArrayList<Student> students,
             Scanner input) {
 
-        int id = readInteger(input, "Enter Student ID: ");
+        int id = readInteger(
+                input,
+                "Enter Student ID: "
+        );
 
         Student result = searchStudent(students, id);
 
@@ -167,7 +240,10 @@ students.add(student);
             ArrayList<Student> students,
             Scanner input) {
 
-        int id = readInteger(input, "Enter Student ID: ");
+        int id = readInteger(
+                input,
+                "Enter Student ID: "
+        );
 
         Student result = searchStudent(students, id);
 
@@ -179,7 +255,10 @@ students.add(student);
         System.out.print("Enter New Name: ");
         String newName = input.nextLine();
 
-        int newAge = readInteger(input, "Enter New Age: ");
+        int newAge = readInteger(
+                input,
+                "Enter New Age: "
+        );
 
         System.out.print("Enter New Major: ");
         String newMajor = input.nextLine();
@@ -195,7 +274,10 @@ students.add(student);
             ArrayList<Student> students,
             Scanner input) {
 
-        int id = readInteger(input, "Enter Student ID: ");
+        int id = readInteger(
+                input,
+                "Enter Student ID: "
+        );
 
         Student result = searchStudent(students, id);
 
@@ -208,5 +290,4 @@ students.add(student);
 
         System.out.println("Student deleted successfully.");
     }
- 
 }

@@ -1,4 +1,4 @@
-public class GraduateStudent extends Student {
+public class GraduateStudent extends Student implements Reportable { 
 
     private String supervisor;
 
@@ -13,5 +13,11 @@ public void displayStudentInfo() {
     System.out.println("Age: " + getAge());
     System.out.println("Major: " + getMajor());
     System.out.println("Supervisor: " + supervisor);
+}
+
+@Override
+public void printReport() {
+    System.out.println("Graduate Student Report");
+    displayStudentInfo();
 }
 }
