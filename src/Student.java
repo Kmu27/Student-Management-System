@@ -26,11 +26,11 @@ public abstract class Student {
 
     public void setName(String name) {
 
-        if (name == null || name.trim().isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
-        }
-
+      if (name == null || name.trim().isEmpty()) {
+    throw new IllegalArgumentException(
+            "Name cannot be empty."
+    );
+}
         this.name = name;
     }
 
@@ -38,16 +38,16 @@ public abstract class Student {
         return age;
     }
 
-    public void setAge(int age) {
+public void setAge(int age) {
 
-        if (age <= 0) {
-            System.out.println("Age must be greater than zero.");
-            return;
-        }
-
-        this.age = age;
+    if (age <= 0) {
+        throw new IllegalArgumentException(
+                "Age must be greater than zero."
+        );
     }
 
+    this.age = age;
+}
     public String getMajor() {
         return major;
     }

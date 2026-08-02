@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-1
+
 public class Main {
 
     public static void main(String[] args) {
@@ -91,7 +91,6 @@ public class Main {
 
             String value = input.nextLine().trim();
 
-            // يقبل 3.34 ويقبل أيضًا 3,34
             value = value.replace(',', '.');
 
             try {
@@ -144,39 +143,49 @@ public class Main {
         System.out.print("Enter Student Major: ");
         String major = input.nextLine();
 
-        Student student;
+        try {
 
-        if (type == 1) {
+            Student student;
 
-            System.out.print("Enter Supervisor Name: ");
-            String supervisor = input.nextLine();
+            if (type == 1) {
 
-            student = new GraduateStudent(
-                    id,
-                    name,
-                    age,
-                    major,
-                    supervisor
-            );
+                System.out.print("Enter Supervisor Name: ");
+                String supervisor = input.nextLine();
 
-        } else {
+                student = new GraduateStudent(
+                        id,
+                        name,
+                        age,
+                        major,
+                        supervisor
+                );
 
-            double gpa = readDouble(
-                    input,
-                    "Enter GPA: "
-            );
+            } else {
 
-            student = new UndergraduateStudent(
-                    id,
-                    name,
-                    age,
-                    major,
-                    gpa
+                double gpa = readDouble(
+                        input,
+                        "Enter GPA: "
+                );
+
+                student = new UndergraduateStudent(
+                        id,
+                        name,
+                        age,
+                        major,
+                        gpa
+                );
+            }
+
+            students.add(student);
+            System.out.println("Student added successfully.");
+
+        } catch (IllegalArgumentException exception) {
+
+            System.out.println(
+                    "Student was not added: "
+                            + exception.getMessage()
             );
         }
-
-        students.add(student);
-        System.out.println("Student added successfully.");
     }
 
     public static void viewStudents(
@@ -263,11 +272,21 @@ public class Main {
         System.out.print("Enter New Major: ");
         String newMajor = input.nextLine();
 
-        result.setName(newName);
-        result.setAge(newAge);
-        result.setMajor(newMajor);
+        try {
 
-        System.out.println("Student updated successfully.");
+            result.setName(newName);
+            result.setAge(newAge);
+            result.setMajor(newMajor);
+
+            System.out.println("Student updated successfully.");
+
+        } catch (IllegalArgumentException exception) {
+
+            System.out.println(
+                    "Student was not updated: "
+                            + exception.getMessage()
+            );
+        }
     }
 
     public static void deleteStudent(
