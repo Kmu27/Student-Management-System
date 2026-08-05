@@ -20,4 +20,7 @@ public void printReport() {
     System.out.println("Graduate Student Report");
     displayStudentInfo();
 }
+public String getSupervisor() {
+    return supervisor;
+}
 }

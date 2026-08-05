@@ -5,7 +5,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Student> students = new ArrayList<>();
+     ArrayList<Student> students =
+        FileManager.loadStudents();
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -35,10 +36,11 @@ public class Main {
                     deleteStudent(students, input);
                     break;
 
-                case 6:
-                    System.out.println("Goodbye!");
-                    input.close();
-                    return;
+              case 6:
+    FileManager.saveStudents(students);
+    System.out.println("Goodbye!");
+    input.close();
+    return;
 
                 default:
                     System.out.println(

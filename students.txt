@@ -1,0 +1,4 @@
+Graduate,1001,Ahmed,28,CS,Dr. Ali
+Undergraduate,1002,Sara,21,IT,3.9
+Graduate,1003,Faisal,30,SE,Dr. Omar
+Undergraduate,1004,Nora,22,AI,3.7
